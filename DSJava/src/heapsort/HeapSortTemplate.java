@@ -28,6 +28,16 @@ public class HeapSortTemplate {
 	 */
 	public static void heapSort(int arr[], int n) {
 		//your code goes here.
+		//re-arrange the given arr element according to Max-Heap condition
+		for(int i=n/2-1; i>=0; i--) {
+			//call heapify() method
+		}
+		
+		for(int i=n-1; i>=0; i--) {
+			//swap(arr[i], arr[0])
+			
+			//call heapify() method
+		}
 		
 	}
 	
@@ -35,7 +45,24 @@ public class HeapSortTemplate {
 	//method to re-arrange all the elements following max-heap condition
 	public static void heapify(int arr[], int n, int index) {
 		//your code goes here.
+		//get the ith index as largest index
+		int largest = index;
 		
+		//calculate left-child index and store in l
+		
+		//calculate right-chile index and store in r
+		
+		//check whether left-child element is greater than the largest index element.
+		
+		//check whether right-chile element is lesser than the largest index element.
+	
+		//check whether largest index is not equal to ith index 
+		if(largest!=index) {
+			//swap(arr[i], arr[largest])
+			
+			//call heapify(arr, n, largest) method 
+		}
+	
 	}
 
 }
