@@ -8,9 +8,24 @@ public class PolishNotation {
 		PolishNotation expression2 = new PolishNotation("A*B+C/D");
 		PolishNotation expression3 = new PolishNotation("(A-B/C)*(A/K-L)");
 		
-		System.out.println(expression1.infixToPostfix());
-		System.out.println(expression2.infixToPostfix());
-		System.out.println(expression3.infixToPostfix());
+		//print postfix
+		System.out.println("Postfix: "+expression1.infixToPostfix());
+		System.out.println("Postfix: "+expression2.infixToPostfix());
+		System.out.println("Postfix: "+expression3.infixToPostfix());
+		
+		//print print prefix 
+		System.out.println("Prefix: "+expression1.infixToPrefix());
+		System.out.println("Prefix: "+expression2.infixToPrefix());
+		System.out.println("Prefix: "+expression3.infixToPrefix());
+		
+		//create infix object
+		PolishNotation infix = new PolishNotation("1*(2+3)");
+		
+		//find postfix
+		System.out.println(infix.infixToPostfix());
+		
+		//find postfix and evaluate together of infix
+		System.out.println(evaluate(infix.infixToPostfix()));
 	}
 	
 	//Constructor
@@ -81,8 +96,9 @@ public class PolishNotation {
 	 * method to find prefix expression of a given infix expression
 	 */
 	public String infixToPrefix() {
-		
-		return null;
+		PolishNotation revExp = new PolishNotation(reverse());
+		revExp.exp = revExp.infixToPostfix();
+		return revExp.reverse();
 	}
 	
 	/*
@@ -103,6 +119,14 @@ public class PolishNotation {
 		return false;
 	}
 	
+	/*
+	 * method to check whether a character is numeric
+	 */
+	public static boolean isNumeric(char ch) {
+		if(ch>='0' && ch<='9')
+			return true;
+		return false;
+	}
 	/*
 	 * method to get the precedence of the operator
 	 */
@@ -132,5 +156,66 @@ public class PolishNotation {
 		if(ch==')')
 			return true;
 		return false;
+	}
+	
+	public String reverse() {
+		//Create an Empty stack of char type
+		StackChar stack = new StackChar(exp.length());
+		
+		//Convert the String exp to char array
+		char arr[] = exp.toCharArray();
+		
+		//push elements of arr[] into the stack
+		for(int i=0; i<arr.length; i++)
+			stack.push(arr[i]);
+		
+		//pop each element and assign the popped elements to the same array starting from index zero
+		for(int i=0; i<arr.length; i++) {
+			if(stack.peek()=='(') {
+				arr[i]=')';
+				stack.pop();
+			}
+				
+			else if(stack.peek()==')') {
+				arr[i]='(';
+				stack.pop();
+			}
+			else
+				arr[i]=stack.pop();
+		}
+			
+		
+		//Convert the arr back to string representation
+		String str1 = String.copyValueOf(arr);
+		
+		//return the str1
+		return str1;
+	}
+	
+	/*
+	 * method for postfix expression evaluation
+	 */
+	public static int evaluate(String str) {
+		Stack stack = new Stack(str.length());
+		char postfix[]=str.toCharArray();
+		for(int i=0; i<postfix.length; i++) {
+			if(isNumeric(postfix[i])==true)
+				stack.push(postfix[i]-'0');
+			else if (isOperator(postfix[i])){
+				int num2 = stack.pop();
+				int num1 = stack.pop();
+				
+				switch(postfix[i]) {
+				case '+': stack.push(num1+num2); break;
+				case '-': stack.push(num1-num2); break;
+				case '*': stack.push(num1*num2); break;
+				case '/': stack.push(num1/num2); break;
+				case '^': stack.push(num1^num2); break;
+				}
+				
+			}
+		}
+			
+		return stack.peek();
 	}
 }
