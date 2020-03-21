@@ -1,6 +1,6 @@
 package linearDS;
 
-import linkedlist.DNode;
+
 import linkedlist.DoublyLL;
 
 public class DoublyLinkedList {
@@ -10,7 +10,7 @@ public class DoublyLinkedList {
 			public static void main(String[] args) {
 				System.out.println("Doubly Linked List");
 				
-				DoublyLL list=new DoublyLL();
+				DoublyLinkedList list=new DoublyLinkedList();
 				
 				//Create a node and insert at the beginning
 				DNode node=new DNode();
@@ -423,6 +423,24 @@ public class DoublyLinkedList {
 					return true;
 				else
 					return false;
+			}
+			
+			/*
+			 * method to search a given key value
+			 */
+			public boolean search(int key) {
+				if(isEmpty()==true) {
+					System.out.println("List is Empty!!!");
+					return false;
+				}
+				
+				DNode temp = head;
+				while(temp!=null) {
+					if(temp.data==key)
+						return true;
+					temp = temp.next;
+				}
+				return false;
 			}
 
 }

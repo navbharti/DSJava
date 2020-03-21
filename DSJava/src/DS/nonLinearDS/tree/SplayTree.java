@@ -1,4 +1,5 @@
 package DS.nonLinearDS.tree;
+
 class SplayNode {
 	  public int data;
 	  public SplayNode left;
@@ -12,19 +13,64 @@ class SplayNode {
 	    this.right = null;
 	  }
 	}
+
 public class SplayTree {
 		  public SplayNode root;
 
 		  public SplayTree() {
 		    this.root = null;
 		  }
+		  
+		  public static void main(String[] args) {
+			    SplayTree t = new SplayTree();
 
+			    SplayNode a, b, c, d, e, f, g, h, i, j, k, l, m;
+			    a = new SplayNode(10);
+			    b = new SplayNode(20);
+			    c = new SplayNode(30);
+			    d = new SplayNode(100);
+			    e = new SplayNode(90);
+			    f = new SplayNode(40);
+			    g = new SplayNode(50);
+			    h = new SplayNode(60);
+			    i = new SplayNode(70);
+			    j = new SplayNode(80);
+			    k = new SplayNode(150);
+			    l = new SplayNode(110);
+			    m = new SplayNode(120);
+
+			    t.insert(a);
+			    t.insert(b);
+			    t.insert(c);
+			    t.insert(d);
+			    t.insert(e);
+			    t.insert(f);
+			    t.insert(g);
+			    t.insert(h);
+			    t.insert(i);
+			    t.insert(j);
+			    t.insert(k);
+			    t.insert(l);
+			    t.insert(m);
+
+			    t.delete(a);
+			    t.delete(m);
+
+			    t.inorder(t.root);
+			  }
+
+		  /*
+		   * method to find maximum value node
+		   */
 		  public SplayNode maximum(SplayNode x) {
 		    while(x.right != null)
 		      x = x.right;
 		    return x;
 		  }
 
+		  /*
+		   * method to do left rotation
+		   */
 		  public void leftRotate(SplayNode x) {
 			  SplayNode y = x.right;
 		    x.right = y.left;
@@ -45,6 +91,9 @@ public class SplayTree {
 		    x.parent = y;
 		  }
 
+		  /*
+		   * method to do right rotation
+		   */
 		  public void rightRotate(SplayNode x) {
 			  SplayNode y = x.left;
 		    x.left = y.right;
@@ -65,6 +114,9 @@ public class SplayTree {
 		    x.parent = y;
 		  }
 
+		  /*
+		   * method to do splaying the node to the root
+		   */
 		  public void splay(SplayNode n) {
 		    while(n.parent != null) { //node is not root
 		      if(n.parent == this.root) { //node is child of root, one rotation
@@ -99,6 +151,9 @@ public class SplayTree {
 		    }
 		  }
 
+		  /*
+		   * method to insert a node in splay tree
+		   */
 		  public void insert(SplayNode n) {
 			  SplayNode y = null;
 			  SplayNode temp = this.root;
@@ -121,6 +176,9 @@ public class SplayTree {
 		    this.splay(n);
 		  }
 
+		  /*
+		   * method to search a node in splay tree
+		   */
 		  public SplayNode search(SplayNode n, int x) {
 		    if(x == n.data) {
 		      this.splay(n);
@@ -134,6 +192,9 @@ public class SplayTree {
 		      return null;
 		  }
 
+		  /*
+		   * method to delete a node in splay tree
+		   */
 		  public void delete(SplayNode n) {
 		    this.splay(n);
 
@@ -158,6 +219,9 @@ public class SplayTree {
 		    }
 		  }
 
+		  /*
+		   * method to traverse the tree in inorder
+		   */
 		  public void inorder(SplayNode n) {
 		    if(n != null) {
 		      inorder(n.left);
@@ -166,41 +230,5 @@ public class SplayTree {
 		    }
 		  }
 
-		  public static void main(String[] args) {
-		    SplayTree t = new SplayTree();
-
-		    SplayNode a, b, c, d, e, f, g, h, i, j, k, l, m;
-		    a = new SplayNode(10);
-		    b = new SplayNode(20);
-		    c = new SplayNode(30);
-		    d = new SplayNode(100);
-		    e = new SplayNode(90);
-		    f = new SplayNode(40);
-		    g = new SplayNode(50);
-		    h = new SplayNode(60);
-		    i = new SplayNode(70);
-		    j = new SplayNode(80);
-		    k = new SplayNode(150);
-		    l = new SplayNode(110);
-		    m = new SplayNode(120);
-
-		    t.insert(a);
-		    t.insert(b);
-		    t.insert(c);
-		    t.insert(d);
-		    t.insert(e);
-		    t.insert(f);
-		    t.insert(g);
-		    t.insert(h);
-		    t.insert(i);
-		    t.insert(j);
-		    t.insert(k);
-		    t.insert(l);
-		    t.insert(m);
-
-		    t.delete(a);
-		    t.delete(m);
-
-		    t.inorder(t.root);
-		  }
+		  
 		}

@@ -36,7 +36,7 @@ public class StackChar {
 		}
 		TOP++;
 		arr[TOP]=data;
-		System.out.println(data +" is pushed");
+		//System.out.println(data +" is pushed");
 	}
 
 	/*

@@ -1,9 +1,11 @@
 package linearDS;
 
+import java.util.Scanner;
+
 public class MyLinkedList {
 	//head is used to keep the beginning node reference
 	 Node head;
-	 
+	 static Scanner input = new Scanner(System.in);
 	 public static  void main(String args[]) {
 		 MyLinkedList list = new MyLinkedList();
 		 //create a new node 
@@ -41,6 +43,8 @@ public class MyLinkedList {
 		 System.out.println();
 		 list.traverseList();
 		 //output: 500->175->1500->300->150->
+		 
+		 System.out.println("\nTotal Nodes: "+list.countNodes());
 		 
 		 //delete the first node
 		 node = list.deleteFromBegin();
@@ -92,7 +96,6 @@ public class MyLinkedList {
 		 list.traverseList();
 		 //output: true
 		 //1500->400->
-				 
 	 }
 	 
 	 /*
@@ -102,18 +105,23 @@ public class MyLinkedList {
 		//check of empty case
 		if(this.isEmpty()==true) {
 			head=node;
-		}
-		else {
-			node.next=head;
-			head=node;
+			return;
 		}
 		
+			node.next=head;
+			head=node;
 	}
 	
 	/*
 	 * method to insert a given node at the end
 	 */
 	public void insertAtEnd(Node node) {
+		//check for empty case
+		if(this.isEmpty()==true) {
+			head=node;
+			return;
+		}
+		
 		//initialize temp node with head
 		Node temp=head;
 		
@@ -130,9 +138,14 @@ public class MyLinkedList {
 	 */
 	
 	public void insertByPositioin(Node node, int position) {
-		int count=1;
+		if(isEmpty()==true) {
+			head=node;
+			return;
+		}
+		int count=0;
 		Node temp=head;
-		while(temp!=null) {
+		while(temp.next!=null) {
+			count++;
 			if(count==position-1)
 				break;
 			temp = temp.next;
@@ -310,8 +323,13 @@ public class MyLinkedList {
 	 * method to count total number of nodes in the list
 	 */
 	public int countNodes() {
-		
-		return 0;
+		int c=0;
+		Node temp=head;
+		while(temp!=null) {
+			temp=temp.next;
+			c++;
+		}
+		return c;
 	}
 	
 	/*
@@ -321,5 +339,56 @@ public class MyLinkedList {
 		if(this.head==null)
 			return true;
 		return false;
+	}
+	
+	/*
+	 * method to create a list with n nodes
+	 */
+	public void createList(int n) {
+		if(isEmpty()!=true) {
+			System.out.println("List is Already created!!!");
+			return;
+		}
+		
+		Node node;
+		while(n>0) {
+			node=new Node();
+			System.out.println("Enter Data: ");
+			node.data=input.nextInt();
+			this.insertAtEnd(node);
+			n--;
+		}
+		
+	}
+	
+	/*
+	 * method to create a list with n nodes
+	 */
+	public MyLinkedList sort() {
+		if(isEmpty()==true) {
+			System.out.println("List is Empty!!!");
+			return null;
+		}
+		
+		//Node temp=head;
+		MyLinkedList list = new MyLinkedList();
+		for(Node i=head; i.next!=null; i = i.next) {
+			if(list.isEmpty()==true) {
+				Node t = i;
+				t.next=null;
+				list.insertAtBegin(t);
+			}
+			Node node;
+			for(node=list.head; node.next!=null; node=node.next) {
+				if(node.next.data>i.data)
+					break;
+			}
+			
+			Node t = i;
+			t.next=node.next;
+			node.next=t;	
+		}
+		return list;
+		
 	}
 }

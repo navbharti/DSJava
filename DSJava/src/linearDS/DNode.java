@@ -9,4 +9,11 @@ public class DNode {
 	
 	//link for next node
 	DNode next;
+	
+	//zero parameter constructor
+	public DNode() {
+		this.data=0;
+		this.prev=null;
+		this.next=null;
+	}
 }
