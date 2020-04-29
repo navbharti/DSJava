@@ -57,7 +57,7 @@ public class BucketSortDemo {
 	    // 4) Concatenate all buckets into arr[] 
 	    int index = 0; 
 	    for (int i = 0; i < n; i++) 
-	        for (int j = 0; j < b[i].size(); j++) 
+	        for (int j = 0; j < b[i].length; j++) 
 	          arr[index++] = b[i][j]; 
 	} 
 }

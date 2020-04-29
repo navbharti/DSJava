@@ -1,6 +1,8 @@
 package DS.sortingSearching.sorting.bucketsort;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class BucketSortFloat {
 
@@ -23,12 +25,11 @@ public class BucketSortFloat {
 	  
 	    // 3) Sort individual buckets 
 	    for (int i=0; i<n; i++) 
-	       sort(b[i]); 
-	  
+	       Collections.sort(b[i]); 
 	    // 4) Concatenate all buckets into arr[] 
 	    int index = 0; 
 	    for (int i = 0; i < n; i++) 
 	        for (int j = 0; j < b[i].size(); j++) 
-	          arr[index++] = b[i][j]; 
+	          arr[index++] = b[i].get(j); 
 	} 
 }
